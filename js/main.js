@@ -1,15 +1,19 @@
+
 const valordolarCompra = 935
 const valordolarVenta = 945
 
-let operacion = prompt("Ingrese la operacion (compra o venta)")
+let operacion = prompt("¿Desea comprar o vender dólares?")
+switch (operacion) {
+    case "comprar":
+        let montoPesos = parseFloat (prompt("Ingrese cuántos pesos va a utilizar para comprar"))
+        alert("Compraste: USD" + (montoPesos / valordolarVenta))
+        break
 
-if (operacion == "compra") {
-let numero1 = parseFloat (prompt("Ingrese cuántos pesos va a utilizar para comprar"))
-alert("Compraste: USD" + (numero1 / valordolarVenta))
+    case "vender":
+        let montoDolares = parseFloat (prompt("Ingrese cuántos dólares va a va vender"))
+        alert("Vendiste: $" + (montoDolares * valordolarCompra))
+        break
 
-} else if (operacion == "venta") {
-    let numero2 = parseFloat (prompt("Ingrese dólares quiere vender"))
-    alert("Vendiste: $" + (numero2 * valordolarCompra))
-
-} else { alert("Operación inválida") 
+    default:
+        alert("Operacion invalida")
 }
