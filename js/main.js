@@ -34,7 +34,7 @@ for(let i = 0; i < dolares.length; i ++) {
             do {
                 montoPesos = parseFloat (prompt("Ingrese cuántos pesos va a utilizar para comprar"))
             } while (isNaN(montoPesos) == true)
-            const DolarCotizacionCompra = alert(dolares.map(prod => " " + prod.title + ": " + " USD " + (montoPesos / prod.compra).toFixed(3)))
+            const DolarCotizacionCompra = alert(dolares.map(prod => " " + prod.title + ": " + " USD " + (montoPesos / prod.compra).toFixed(2)))
             }
     
             let confirmacionCompra = true
