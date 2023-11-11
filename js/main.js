@@ -57,7 +57,7 @@ for(let i = 0; i < dolares.length; i ++) {
             do {
             montoDolares = parseFloat (prompt("Ingrese cuántos dólares va a va vender"))
             } while (isNaN(montoDolares) == true)
-            const DolarCotizacionVenta = alert(dolares.map(prod => " " + prod.title + ": " + " $" + (montoDolares * prod.venta)))
+            const DolarCotizacionVenta = alert(dolares.map(prod => " " + prod.title + ": " + " $ " + (montoDolares * prod.venta)))
             }
     
             let confirmacionVenta = true
