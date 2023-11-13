@@ -25,14 +25,14 @@ for(let i = 0; i < dolares.length; i ++) {
     
     let confirmacionCompra = true
             do {
-    let operacion = prompt("¿Desea comprar o vender dólares?")
+    let operacion = prompt("¿Desea comprar o vender dólares?").toLowerCase()
     switch (operacion) {
         case "comprar":
             const DolarCompra = alert(dolares.map(prod => " " + prod.title + ": " + " $ " + prod.compra))
             function compra(monto, valor) {
             let montoPesos
             do {
-                montoPesos = parseFloat (prompt("Ingrese cuántos pesos va a utilizar para comprar"))
+                montoPesos = parseFloat (prompt("Ingrese cuántos pesos va a utilizar para comprar").toLowerCase())
             } while (isNaN(montoPesos) == true)
             const DolarCotizacionCompra = alert(dolares.map(prod => " " + prod.title + ": " + " USD " + (montoPesos / prod.compra).toFixed(2)))
             }
@@ -41,7 +41,7 @@ for(let i = 0; i < dolares.length; i ++) {
             do {
                 compra ()
     
-                let respuesta = prompt("¿Desea volver a calcular?")
+                let respuesta = prompt("¿Desea volver a calcular?").toLowerCase()
     
                 if (respuesta == "no") {
                     confirmacionCompra = false
@@ -55,7 +55,7 @@ for(let i = 0; i < dolares.length; i ++) {
             function venta(monto, valor) {
             let montoDolares
             do {
-            montoDolares = parseFloat (prompt("Ingrese cuántos dólares va a va vender"))
+            montoDolares = parseFloat (prompt("Ingrese cuántos dólares va a va vender").toLowerCase())
             } while (isNaN(montoDolares) == true)
             const DolarCotizacionVenta = alert(dolares.map(prod => " " + prod.title + ": " + " $ " + (montoDolares * prod.venta)))
             }
@@ -65,7 +65,7 @@ for(let i = 0; i < dolares.length; i ++) {
                 
                 venta ()
     
-                let respuesta = prompt("¿Desea volver a calcular?")
+                let respuesta = prompt("¿Desea volver a calcular?").toLowerCase()
     
                 if (respuesta == "no") {
                     confirmacionVenta = false
@@ -77,7 +77,7 @@ for(let i = 0; i < dolares.length; i ++) {
         default:
             alert("Operacion invalida")
     }
-    let respuesta = prompt("¿Desea realizar otro cálculo?")
+    let respuesta = prompt("¿Desea realizar otro cálculo?").toLowerCase()
     
                 if (respuesta == "no") {
                     confirmacionCompra = false
