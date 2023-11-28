@@ -40,6 +40,9 @@ for (const dolar of dolares) {
 
 
 
+
+
+
 //Select para tipos de dolar compra
 let tipoDolarCompra = document.getElementById("tipoDolarCompra")
 for (const dolar of dolares) {
@@ -70,13 +73,19 @@ let calcularCompra = document.getElementById("calcularCompra")
 let resultadoCompra = document.querySelector("#resultadoCompra")
 let dolarSeleccionadoCompra = document.getElementById("tipoDolarCompra")
 
+
 calcularCompra.onclick = () => {
+    if (comprar.value > 0) {
     let precioCompraFinal = (comprar.value / dolarSeleccionadoCompra.value).toFixed(2)
     let totalDolares = document.getElementById("totalDolares")
     totalDolares.innerHTML = `USD ${precioCompraFinal}`
     resultadoCompra.appendChild(totalDolares)
     localStorage.setItem("Compra USD ", precioCompraFinal)
     historialCompra()
+    errorMensajeCompra.remove()
+    } else {
+        validarNumeroCompra()
+    }
 }
 
 function historialCompra() {
@@ -85,6 +94,23 @@ function historialCompra() {
     pCompra.textContent = "Compra USD " + CompraLocalStorage
     historialResultado.appendChild(pCompra)
 }
+
+
+
+//validadores del input de compra
+function validarNumeroCompra() {
+    let numeroCompra = document.getElementById('comprar').value;
+    numeroCompra = parseFloat(numeroCompra);
+
+    if (isNaN(numeroCompra) || numeroCompra <= 0) {
+        document.getElementById('errorMensajeCompra').innerText = 'Ingrese un número mayor a 0'
+    } else {
+        errorMensajeCompra.remove()
+    }
+}
+
+
+
 
 
 
@@ -97,12 +123,17 @@ let resultadoVenta = document.querySelector("#resultadoVenta")
 let dolarSeleccionadoVenta = document.getElementById("tipoDolarVenta")
 
 calcularVenta.onclick = () => {
+    if (vender.value > 0) {
     let precioVentaFinal = (vender.value / dolarSeleccionadoVenta.value).toFixed(2)
     let totalPesos = document.getElementById("totalPesos")
     totalPesos.innerHTML = `$ ${precioVentaFinal}`
     resultadoVenta.appendChild(totalPesos)
     localStorage.setItem("Vende por $ ", precioVentaFinal)
     historialVenta()
+    errorMensajeVenta.remove()
+    } else {
+        validarNumeroVenta()
+    }
 }
 
 function historialVenta() {
@@ -110,6 +141,20 @@ function historialVenta() {
     let pVenta = document.createElement("p")
     pVenta.textContent = "Vende por $ " + VentaLocalStorage
     historialResultado.appendChild(pVenta)
+}
+
+
+
+//validadores del input de venta
+function validarNumeroVenta() {
+    let numeroVenta = document.getElementById('vender').value;
+    numeroVenta = parseFloat(numeroVenta);
+
+    if (isNaN(numeroVenta) || numeroVenta <= 0) {
+        document.getElementById('errorMensajeVenta').innerText = 'Ingrese un número mayor a 0'
+    } else {
+        errorMensajeVenta.remove()
+    }
 }
 
 
@@ -122,6 +167,14 @@ reset.onclick = () => {
     localStorage.clear()
     historialResultado.remove()
 }
+
+
+
+
+
+
+
+
 
 
 

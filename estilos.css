@@ -101,11 +101,6 @@
         justify-content: center;
         width: calc(33.33333% - 16px);
     }
-
-    .card:hover {
-        background-color: #ffefc6;
-        border-color: #614d1a;
-    }
     
     .precios {
         display: flex;
