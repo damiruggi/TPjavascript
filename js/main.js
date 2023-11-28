@@ -65,49 +65,52 @@ for (const dolar of dolares) {
 //Esto es la calculadora de compra
 let comprar = document.getElementById("comprar")
 let calcularCompra = document.getElementById("calcularCompra")
-let resultadoCompra = document.querySelector("#resultadoCompra");
+let resultadoCompra = document.querySelector("#resultadoCompra")
 let dolarSeleccionadoCompra = document.getElementById("tipoDolarCompra")
 
 calcularCompra.onclick = () => {
     let precioCompraFinal = (comprar.value / dolarSeleccionadoCompra.value).toFixed(2)
     let totalDolares = document.getElementById("totalDolares")
     totalDolares.innerHTML = `USD ${precioCompraFinal}`
-    resultadoCompra.appendChild(totalDolares);
-    localStorage.setItem("Compra USD ", precioCompraFinal);
-
-
-    //Historial de compra
-    for (let iCompras=0; iCompras<localStorage.length; iCompras++) {
-        let claveCompras = localStorage.key(iCompras)
-        let historialCompra = document.createElement("p")
-        historialCompra.innerHTML = `${claveCompras} ${localStorage.getItem(claveCompras)}`
-        historialCompras.appendChild(historialCompra);
-    }
+    resultadoCompra.appendChild(totalDolares)
+    localStorage.setItem("Compra USD ", precioCompraFinal)
+    historialCompra()
 }
+
+function historialCompra() {
+    let CompraLocalStorage = localStorage.getItem("Compra USD ")
+    let pCompra = document.createElement("p")
+    pCompra.textContent = "Compra USD " + CompraLocalStorage
+    historialCompras.appendChild(pCompra)
+}
+
+
 
 
 
 //Esto es la calculadora de venta
 let vender = document.getElementById("vender")
 let calcularVenta = document.getElementById("calcularVenta")
-let resultadoVenta = document.querySelector("#resultadoVenta");
+let resultadoVenta = document.querySelector("#resultadoVenta")
 let dolarSeleccionadoVenta = document.getElementById("tipoDolarVenta")
 
 calcularVenta.onclick = () => {
     let precioVentaFinal = (vender.value / dolarSeleccionadoVenta.value).toFixed(2)
     let totalPesos = document.getElementById("totalPesos")
     totalPesos.innerHTML = `$ ${precioVentaFinal}`
-    resultadoVenta.appendChild(totalPesos);
-    localStorage.setItem("Vende por $ ", precioVentaFinal);
-
-    //Historial de venta
-    for (let iVentas=0; iVentas<localStorage.length; iVentas++) {
-        let claveVentas = localStorage.key(iVentas)
-        let historialVenta = document.createElement("p")
-        historialVenta.innerHTML = `${claveVentas} ${localStorage.getItem(claveVentas)}`
-        historialVentas.appendChild(historialVenta);
-    }
+    resultadoVenta.appendChild(totalPesos)
+    localStorage.setItem("Vende por $ ", precioVentaFinal)
+    historialVenta()
 }
+
+function historialVenta() {
+    let VentaLocalStorage = localStorage.getItem("Vende por $ ")
+    let pVenta = document.createElement("p")
+    pVenta.textContent = "Vende por $ " + VentaLocalStorage
+    historialVentas.appendChild(pVenta)
+}
+
+
 
 
 
@@ -118,6 +121,3 @@ reset.onclick = () => {
     historialCompras.remove()
     historialVentas.remove()
 }
-
-
-
