@@ -21,8 +21,7 @@
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
             </div>
             <div class="offcanvas-body" id="historial">
-                <div id="historialCompras"></div>
-                <div id="historialVentas"></div>
+                <div id="historialResultado"></div>
             </div>
             <div class="offcanvas-footer">
                 <button type="button" class="btn btn-primary" id="reset">Limpiar historial</button>
@@ -60,7 +59,7 @@
             <div class="tab-pane container active" id="compra">
                     <form id="formulario">
                         <div class="form-floating mb-3 mt-3">
-                            <input type="number" class="form-control" id="comprar" placeholder="Ingrese el monto en pesos" name="pesos" value="0" min="0">
+                            <input type="number" class="form-control" id="comprar" name="pesos" value="0" min="0">
                             <label for="pesos">Ingrese el monto en pesos</label>
                         </div>
                         <div class="form-floating">
@@ -81,7 +80,7 @@
             <div class="tab-pane container fade" id="venta">
                 <form id="formulario">
                     <div class="form-floating mb-3 mt-3">
-                        <input type="number" class="form-control" id="vender" placeholder="Ingrese el monto en dólares" name="dolares" value="0" min="0">
+                        <input type="number" class="form-control" id="vender" name="dolares" value="0" min="0">
                         <label for="dolares">Ingrese el monto en dólares</label>
                     </div>
                     <div class="form-floating">

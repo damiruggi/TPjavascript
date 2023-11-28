@@ -38,6 +38,8 @@ for (const dolar of dolares) {
 
 
 
+
+
 //Select para tipos de dolar compra
 let tipoDolarCompra = document.getElementById("tipoDolarCompra")
 for (const dolar of dolares) {
@@ -81,7 +83,7 @@ function historialCompra() {
     let CompraLocalStorage = localStorage.getItem("Compra USD ")
     let pCompra = document.createElement("p")
     pCompra.textContent = "Compra USD " + CompraLocalStorage
-    historialCompras.appendChild(pCompra)
+    historialResultado.appendChild(pCompra)
 }
 
 
@@ -107,7 +109,7 @@ function historialVenta() {
     let VentaLocalStorage = localStorage.getItem("Vende por $ ")
     let pVenta = document.createElement("p")
     pVenta.textContent = "Vende por $ " + VentaLocalStorage
-    historialVentas.appendChild(pVenta)
+    historialResultado.appendChild(pVenta)
 }
 
 
@@ -118,6 +120,8 @@ function historialVenta() {
 let reset = document.getElementById("reset")
 reset.onclick = () => {
     localStorage.clear()
-    historialCompras.remove()
-    historialVentas.remove()
+    historialResultado.remove()
 }
+
+
+
