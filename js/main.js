@@ -193,6 +193,27 @@ reset.onclick = () => {
 
 
 
+//Hago un alerta cada 10 minutos para recordar que revise los valores ya que se ven actualizando por la API
+setTimeout (() => {
+    Swal.fire({
+        title: "Hace más de 10 minutos que estas en la página, recordá chequear los valores del precio ya que se actualizan",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `
+        }
+      });
+}, 600000)
+
 
 
 
