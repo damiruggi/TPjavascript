@@ -1,44 +1,57 @@
+
+
+//Genero el constructor para los datos que quiero traer
 class Dolar {
-    constructor(title, compra, venta) {
-        this.title = title
+    constructor(nombre,compra,venta,fechaActualizacion) {
+        this.nombre = nombre
         this.compra = compra
         this.venta = venta
+        this.fechaActualizacion = fechaActualizacion
     }
 }
-const dolar1 = new Dolar("Dólar Blue", 940, 960)
-const dolar2 = new Dolar("Dólar MEP", 872.87, 875.45)
-const dolar3 = new Dolar("Dólar Banco Nación", 347.50, 365.50)
-const dolar4 = new Dolar("Dólar Solidario", 695, 731)
-const dolar5 = new Dolar("Dólar Tarjeta", 695, 731)
-const dolar6 = new Dolar("Dólar Turista", 695, 731)
-const dolar7 = new Dolar("Dólar Mayorista", 348.95, 349.95)
-const dolar8 = new Dolar("Dólar Futuro", 383.60, 383.90)
-const dolar9 = new Dolar("Dólar Cripto", 919.85, 888.13)
-const dolar10 = new Dolar("Dólar CCL", 874.84, 881.09)
-const dolares = [dolar1, dolar2, dolar3, dolar4, dolar5, dolar6, dolar7, dolar8, dolar9, dolar10]
+
+
+
+//Traigo los datos de la API de dolar
+fetch("https://dolarapi.com/v1/dolares")
+    .then(response => response.json())
+    .then(data => {
+        const dolar1 = new Dolar(data[0].nombre, data[0].compra, data[0].venta, formatearFecha(data[0].fechaActualizacion))
+        const dolar2 = new Dolar(data[1].nombre, data[1].compra, data[1].venta, formatearFecha(data[1].fechaActualizacion))
+        const dolar3 = new Dolar(data[2].nombre, data[2].compra, data[2].venta, formatearFecha(data[2].fechaActualizacion))
+        const dolar4 = new Dolar(data[3].nombre, data[3].compra, data[3].venta, formatearFecha(data[3].fechaActualizacion))
+        const dolar5 = new Dolar(data[4].nombre, data[4].compra, data[4].venta, formatearFecha(data[4].fechaActualizacion))
+        const dolar6 = new Dolar(data[5].nombre, data[5].compra, data[5].venta, formatearFecha(data[5].fechaActualizacion))
+        const dolar7 = new Dolar(data[6].nombre, data[6].compra, data[6].venta, formatearFecha(data[6].fechaActualizacion))
+        const dolares = [dolar1, dolar2, dolar3, dolar4, dolar5, dolar6, dolar7]
 
 
 
 
-//Cards de cotizaciones
-let cards = document.querySelector(".cards");
-let i = 0; i < dolares.length; i ++
-dolares.sort((compra1, compra2) => compra1.compra -compra2.compra)[i]
+
+
+
+// Cards de cotizaciones
+let cards = document.querySelector(".cards")
 for (const dolar of dolares) {
-    let card = document.createElement("div")
-    card.className = "card"
-    card.innerHTML = `<h3>${dolar.title}</h3>
-                            <div class="precios">
-                                <div class="precio"><h4>Compra</h4><h2>${dolar.compra}</h2></div>
-                                <div class="precio"><h4>Venta</h4><h2>${dolar.venta}</h2></div>
-                            </div>
-                            <span>Últimas 24hs.</span>`
-    cards.appendChild(card);
+let card = document.createElement("div")
+card.className = "card"
+
+let compraHTML = ""
+if (dolar.compra !== null) {
+    compraHTML = `<div class="precio"><h4>Compra</h4><h2>${dolar.compra}</h2></div>`
 }
 
-
-
-
+card.innerHTML = `<h3>${dolar.nombre}</h3>
+                    <div class="precios">${compraHTML}
+                        <div class="precio">
+                            <h4>Venta</h4>
+                            <h2>${dolar.venta}</h2>
+                        </div>
+                    </div>
+                    <span>${dolar.fechaActualizacion}</span>`
+cards.appendChild(card)
+}
 
 
 
@@ -46,21 +59,25 @@ for (const dolar of dolares) {
 //Select para tipos de dolar compra
 let tipoDolarCompra = document.getElementById("tipoDolarCompra")
 for (const dolar of dolares) {
-    let optionCompra = document.createElement("option")
-    optionCompra.value = dolar.compra
-    optionCompra.id = dolar.title
-    optionCompra.innerHTML = `${dolar.title} = USD ${dolar.compra}`
-    tipoDolarCompra.appendChild(optionCompra)
+  if (dolar.compra !== null) {
+        let optionCompra = document.createElement("option")
+        optionCompra.value = dolar.compra
+        optionCompra.id = dolar.nombre
+        optionCompra.innerHTML = `${dolar.nombre} = USD ${dolar.compra}`
+        tipoDolarCompra.appendChild(optionCompra)
+  }
 }
 
 
 //Select para tipos de dolar venta
 let tipoDolarVenta = document.getElementById("tipoDolarVenta")
 for (const dolar of dolares) {
-    let optionVenta = document.createElement("option")
-    optionVenta.value = dolar.venta
-    optionVenta.innerHTML = `${dolar.title} = USD ${dolar.venta}`
-    tipoDolarVenta.appendChild(optionVenta)
+    if (dolar.venta !== null) {
+        let optionVenta = document.createElement("option")
+        optionVenta.value = dolar.venta
+        optionVenta.innerHTML = `${dolar.nombre} = USD ${dolar.venta}`
+        tipoDolarVenta.appendChild(optionVenta)
+    }
 }
 
 
@@ -82,7 +99,6 @@ calcularCompra.onclick = () => {
     resultadoCompra.appendChild(totalDolares)
     localStorage.setItem("Compra USD ", precioCompraFinal)
     historialCompra()
-    errorMensajeCompra.remove()
     } else {
         validarNumeroCompra()
     }
@@ -98,19 +114,19 @@ function historialCompra() {
 
 
 //validadores del input de compra
-function validarNumeroCompra() {
-    let numeroCompra = document.getElementById('comprar').value;
-    numeroCompra = parseFloat(numeroCompra);
+let inputCompra = document.getElementById('comprar')
+inputCompra.addEventListener('input', () => {
+    validarNumeroCompra()
+})
 
+function validarNumeroCompra() {
+    let numeroCompra = parseFloat(inputCompra.value)
     if (isNaN(numeroCompra) || numeroCompra <= 0) {
         document.getElementById('errorMensajeCompra').innerText = 'Ingrese un número mayor a 0'
     } else {
-        errorMensajeCompra.remove()
+        document.getElementById('errorMensajeCompra').innerText = ''
     }
 }
-
-
-
 
 
 
@@ -130,7 +146,6 @@ calcularVenta.onclick = () => {
     resultadoVenta.appendChild(totalPesos)
     localStorage.setItem("Vende por $ ", precioVentaFinal)
     historialVenta()
-    errorMensajeVenta.remove()
     } else {
         validarNumeroVenta()
     }
@@ -145,17 +160,23 @@ function historialVenta() {
 
 
 
-//validadores del input de venta
-function validarNumeroVenta() {
-    let numeroVenta = document.getElementById('vender').value;
-    numeroVenta = parseFloat(numeroVenta);
 
+//validadores del input de venta
+let inputVenta = document.getElementById('vender')
+inputVenta.addEventListener('input', () => {
+    validarNumeroVenta()
+})
+
+function validarNumeroVenta() {
+    let numeroVenta = parseFloat(inputVenta.value)
     if (isNaN(numeroVenta) || numeroVenta <= 0) {
         document.getElementById('errorMensajeVenta').innerText = 'Ingrese un número mayor a 0'
     } else {
-        errorMensajeVenta.remove()
+        document.getElementById('errorMensajeVenta').innerText = ''
     }
 }
+
+
 
 
 
@@ -164,8 +185,8 @@ function validarNumeroVenta() {
 //limpia el historial
 let reset = document.getElementById("reset")
 reset.onclick = () => {
-    localStorage.clear()
-    historialResultado.remove()
+  let historialResultado = document.getElementById("historialResultado")
+  historialResultado.innerHTML = ""
 }
 
 
@@ -175,6 +196,25 @@ reset.onclick = () => {
 
 
 
+//Cierro el fecth de la API y cambio el formato de la fecha
+})
 
+//Muestro un alerta en el caso de que la API este caida
+.catch(error => {
+    Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Hubo un problema en la recolección de datos y estamos trabajando para solucionarlo",
+      });
+})
 
-
+    //Cambio el formato de la fecha que trae la API
+function formatearFecha(fecha) {
+    return new Date(fecha).toLocaleString('es-AR', {
+        hour: 'numeric',
+        minute: 'numeric',
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric'
+    })
+}
