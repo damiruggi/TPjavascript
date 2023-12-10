@@ -140,7 +140,7 @@ let dolarSeleccionadoVenta = document.getElementById("tipoDolarVenta")
 
 calcularVenta.onclick = () => {
     if (vender.value > 0) {
-    let precioVentaFinal = (vender.value / dolarSeleccionadoVenta.value).toFixed(2)
+    let precioVentaFinal = (vender.value * dolarSeleccionadoVenta.value).toFixed(2)
     let totalPesos = document.getElementById("totalPesos")
     totalPesos.innerHTML = `$ ${precioVentaFinal}`
     resultadoVenta.appendChild(totalPesos)
